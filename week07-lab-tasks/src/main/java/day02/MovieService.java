@@ -1,6 +1,5 @@
 package day02;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,8 +20,8 @@ public class MovieService {
     }
 
     private void fillListWithMovies(List<String> lines) {
-        for (String s : lines) {
-            String[] temp = s.split(";");
+        for (String actual : lines) {
+            String[] temp = actual.split(";");
             movies.add(new Movie(temp[0], Integer.parseInt(temp[1]), temp[2]));
         }
     }

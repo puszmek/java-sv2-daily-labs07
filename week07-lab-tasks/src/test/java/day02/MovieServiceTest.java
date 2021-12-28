@@ -2,6 +2,7 @@ package day02;
 
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,5 +23,6 @@ class MovieServiceTest {
         IllegalStateException ise = assertThrows(IllegalStateException.class,
             () -> new MovieService(Paths.get("movies.txt")));
         assertEquals("Can't read file!", ise.getMessage());
+        assertEquals(NoSuchFileException.class, ise.getCause().getClass());
     }
 }
