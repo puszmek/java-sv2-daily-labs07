@@ -2,45 +2,48 @@ package day01;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class HumanTest {
-
-//    @Test
-//    void testCreateHumanWithNullName() {
-//        IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> new Human(null, minYear));
-//        assertEquals("Name cannot be null!", iae.getMessage());
-//    }
 
     @Test
     void testCreate() {
         Human human = new Human("John Doe", 1998);
         assertEquals("John Doe", human.getName());
-        assertEquals(1998, human.getYearOfBrith());
+        assertEquals(1998, human.getYearOfBirth());
     }
 
     @Test
-    void testCreateHumanWithWrongName() {
-        IllegalArgumentException iaeNameNull = assertThrows(IllegalArgumentException.class,
-                () -> new Human(null, 1988));
-        assertEquals("Invalid name: null", iaeNameNull.getMessage());
+    void testCreateHumanWithNullName() {
+        IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> new Human(null, 1980));
+        assertEquals("Name is invalid! null", iae.getMessage());
+    }
+
+    @Test
+    void testCreateHumanWithEmptyStringName() {
         IllegalArgumentException iaeNameEmptyString = assertThrows(IllegalArgumentException.class,
                 () -> new Human("", 1988));
-        assertEquals("Invalid name: ", iaeNameEmptyString.getMessage());
-        IllegalArgumentException iaeOneName = assertThrows(IllegalArgumentException.class,
-                () -> new Human("John", 1988));
-        assertEquals("Invalid name: John", iaeOneName.getMessage());
+        assertEquals("Name is invalid! ", iaeNameEmptyString.getMessage());
     }
 
     @Test
-    void testCreateHumanWithWrongYear() {
+    void testCreateHumanWithOneName() {
+        IllegalArgumentException iaeOneName = assertThrows(IllegalArgumentException.class,
+                () -> new Human("John", 1988));
+        assertEquals("Name is invalid! John", iaeOneName.getMessage());
+    }
+
+    @Test
+    void testCreateHumanWithWrongYearTooOld() {
         IllegalArgumentException iaeTooOld = assertThrows(IllegalArgumentException.class,
                 () -> new Human("John Doe", 1900));
-        assertEquals("Invalid year: 1900", iaeTooOld.getMessage());
+        assertEquals("Year of birth is invalid! 1900", iaeTooOld.getMessage());
+    }
+
+    @Test
+    void testCreateHumanWithWrongYearTooYoung() {
         IllegalArgumentException iaeTooYoung = assertThrows(IllegalArgumentException.class,
                 () -> new Human("John Doe", 2022));
-        assertEquals("Invalid year: 2022", iaeTooYoung.getMessage());
+        assertEquals("Year of birth is invalid! 2022", iaeTooYoung.getMessage());
     }
 }
