@@ -15,7 +15,7 @@ public class Store {
 
     public void addProduct(Product p) {
         if (p.getSellDate().isAfter(LocalDate.now())) {
-            throw new IllegalStateException("Invalid sell date!");
+            throw new IllegalArgumentException("Invalid sell date!");
         }
         soldProducts.add(p);
     }
